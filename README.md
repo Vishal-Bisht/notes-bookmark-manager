@@ -43,9 +43,10 @@ A full-stack web application for managing personal notes and bookmarks with powe
 - **node-fetch** - Fetching URL metadata
 
 ### Frontend
-- **Next.js 14** - React framework (App Router)
-- **React 18** - UI library
-- **Tailwind CSS** - Styling
+- **Next.js 16** - React framework (App Router)
+- **React 19** - UI library
+- **Tailwind CSS 4** - Styling
+- **Axios** - HTTP client
 - **react-hot-toast** - Notifications
 - **react-icons** - Icons
 
@@ -95,16 +96,14 @@ notes-bookmark-manager/
 │   │   │   ├── NoteForm.js
 │   │   │   ├── SearchBar.js
 │   │   │   └── TagInput.js
-│   │   ├── context/
-│   │   │   └── AuthContext.js
-│   │   └── lib/
-│   │       └── api.js
-│   ├── .env.local
+│   │   └── context/
+│   │       └── AuthContext.js
+│   │   
+│   ├── .env
 │   ├── jsconfig.json
 │   ├── next.config.js
 │   ├── package.json
 │   ├── postcss.config.js
-│   └── tailwind.config.js
 │
 └── README.md
 ```
@@ -131,15 +130,15 @@ notes-bookmark-manager/
 
 3. Create a `.env` file from the example:
    ```bash
-   cp .env.example .env
+   cp .env.example
    ```
 
 4. Update the `.env` file with your configuration:
    ```env
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/notes-bookmark-db
-   JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-   JWT_EXPIRE=7d
+   MONGO_URI=mongodb://localhost:27017/notes-bookmark-db
+   JWT_SECRET=your-super-secret-jwt-key
+   FRONTEND_URL=http://localhost:3000
    ```
 
 5. Start the server:
@@ -165,9 +164,9 @@ The backend will run on `http://localhost:5000`
    npm install
    ```
 
-3. Create a `.env.local` file:
+3. Create a `.env` file:
    ```env
-   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   NEXT_PUBLIC_API_URL=http://localhost:5000
    ```
 
 4. Start the development server:
@@ -187,8 +186,8 @@ POST /api/auth/register
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "User",
+  "email": "user@example.com",
   "password": "password123"
 }
 ```
@@ -199,14 +198,14 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "john@example.com",
+  "email": "user@example.com",
   "password": "password123"
 }
 ```
 
 #### Get Current User
 ```http
-GET /api/auth/me
+GET /api/auth/user
 Authorization: Bearer <token>
 ```
 
@@ -397,14 +396,28 @@ All API endpoints return consistent error responses:
 - `404` - Not Found
 - `500` - Server Error
 
-## 🎨 Screenshots
 
-The application features:
-- Clean landing page with feature highlights
-- Login/Register pages with validation
-- Notes list with search, filter, and CRUD
-- Bookmarks list with search, filter, and CRUD
-- Responsive design for all screen sizes
+## 🎯 Skills This Project Tests
+
+| Skill | Implementation |
+|-------|----------------|
+| **REST API Design** | Proper endpoint structure, HTTP methods, status codes |
+| **Data Validation** | Express-validator for input sanitization and validation |
+| **Error Handling** | Consistent error responses, try-catch patterns |
+| **Authentication** | JWT-based auth with protected routes and middleware |
+| **React/Next.js** | App router, client components, hooks, context API |
+| **State Management** | React Context for global auth state |
+| **Tailwind CSS** | Responsive design, custom theming with CSS variables |
+| **Clean Code** | Modular structure, separation of concerns, ES Modules |
+| **Real-world Data Modeling** | MongoDB schemas with user relationships |
+
+## 🚀 Deployment
+
+**Backend (Render):**
+- Set environment variables: `MONGO_URL`, `JWT_SECRET`, `NODE_ENV=production`, `FRONTEND_URL`
+
+**Frontend (Vercel):**
+- Set environment variable: `NEXT_PUBLIC_API_URL` pointing to your Render backend URL
 
 ## 📝 License
 
@@ -412,4 +425,4 @@ This project is for educational purposes.
 
 ## 👨‍💻 Author
 
-Personal Notes and Bookmark Manager - Full Stack Application
+Vishal Bisht
